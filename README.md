@@ -1,0 +1,2 @@
+# BalanceFlow
+Collaborative finance platform
