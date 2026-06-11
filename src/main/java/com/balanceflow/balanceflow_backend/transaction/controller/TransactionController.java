@@ -31,17 +31,24 @@ public class TransactionController {
     }
 
     @GetMapping
-    public List<TransactionResponse> getAll(
-            @RequestHeader("Authorization") String authHeader
+    public List<TransactionResponse> getTransactions(
+            @RequestHeader("Authorization") String authHeader,
+            @RequestParam(required = false) Long categoryId
     ) {
 
         String token = authHeader.replace("Bearer ", "");
 
         String email = jwtService.extractEmail(token);
 
+        if (categoryId != null) {
+            return transactionService.getByCategory(
+                    email,
+                    categoryId
+            );
+        }
+
         return transactionService.getAll(email);
     }
-
     @PutMapping("/{id}")
     public TransactionResponse update(
             @PathVariable Long id,

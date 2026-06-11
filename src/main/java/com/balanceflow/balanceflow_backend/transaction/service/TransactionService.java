@@ -135,4 +135,33 @@ public class TransactionService {
                 "Transaction deleted successfully"
         );
     }
+    public List<TransactionResponse> getByCategory(
+            String email,
+            Long categoryId
+    ) {
+
+        User user = userRepository.findByEmail(email)
+                .orElseThrow();
+
+        return transactionRepository
+                .findByUserIdAndCategoryId(
+                        user.getId(),
+                        categoryId
+                )
+                .stream()
+                .map(transaction -> TransactionResponse.builder()
+                        .id(transaction.getId())
+                        .amount(transaction.getAmount())
+                        .note(transaction.getNote())
+                        .transactionDate(transaction.getTransactionDate())
+                        .categoryName(
+                                transaction.getCategory().getName()
+                        )
+                        .categoryType(
+                                transaction.getCategory().getType()
+                        )
+                        .build()
+                )
+                .toList();
+    }
 }
