@@ -1,0 +1,9 @@
+package com.balanceflow.balanceflow_backend.group.dto;
+
+import lombok.Data;
+
+@Data
+public class AddMemberRequest {
+
+    private String email;
+}

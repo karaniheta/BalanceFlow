@@ -26,7 +26,8 @@ public class SecurityConfig {
                         session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 )
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/auth/**", "/test-token")
+                        .requestMatchers("/api/auth/**", "/test-token" ,  "/redis-test" , "/mail-test",    "/api/auth/verify-otp",
+                                "/api/auth/reset-password")
                         .permitAll()
                         .anyRequest()
                         .authenticated()
