@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import com.balanceflow.balanceflow_backend.transaction.dto.DeleteResponse;
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/transactions")
@@ -33,7 +34,7 @@ public class TransactionController {
     @GetMapping
     public List<TransactionResponse> getTransactions(
             @RequestHeader("Authorization") String authHeader,
-            @RequestParam(required = false) Long categoryId
+            @RequestParam(required = false) UUID categoryId
     ) {
 
         String token = authHeader.replace("Bearer ", "");
@@ -51,7 +52,7 @@ public class TransactionController {
     }
     @PutMapping("/{id}")
     public TransactionResponse update(
-            @PathVariable Long id,
+            @PathVariable UUID id,
             @RequestBody CreateTransactionRequest request,
             @RequestHeader("Authorization") String authHeader
     ) {
@@ -69,7 +70,7 @@ public class TransactionController {
 
     @DeleteMapping("/{id}")
     public DeleteResponse delete(
-            @PathVariable Long id,
+            @PathVariable UUID id,
             @RequestHeader("Authorization") String authHeader
     ) {
 

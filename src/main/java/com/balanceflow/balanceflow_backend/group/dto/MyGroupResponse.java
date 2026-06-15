@@ -7,7 +7,7 @@ import java.util.UUID;
 
 @Data
 @Builder
-public class GroupResponse {
+public class MyGroupResponse {
 
     private UUID id;
 
@@ -15,5 +15,5 @@ public class GroupResponse {
 
     private String description;
 
-    private String createdBy;
+    private String role;
 }

@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -30,7 +31,7 @@ public class CategoryService {
     }
 
     public Category update(
-            Long id,
+            UUID id,
             CreateCategoryRequest request
     ) {
 
@@ -43,7 +44,7 @@ public class CategoryService {
         return categoryRepository.save(category);
     }
 
-    public DeleteResponse delete(Long id) {
+    public DeleteResponse delete(UUID id) {
 
         Category category = categoryRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Category not found"));

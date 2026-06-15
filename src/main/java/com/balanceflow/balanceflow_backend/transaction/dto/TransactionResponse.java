@@ -3,13 +3,15 @@ package com.balanceflow.balanceflow_backend.transaction.dto;
 import lombok.Builder;
 import lombok.Data;
 
+import java.util.UUID;
+
 import java.time.LocalDate;
 
 @Data
 @Builder
 public class TransactionResponse {
 
-    private Long id;
+    private UUID id;
 
     private Double amount;
 

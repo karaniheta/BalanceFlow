@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/categories")
@@ -30,7 +31,7 @@ public class CategoryController {
 
     @PutMapping("/{id}")
     public Category update(
-            @PathVariable Long id,
+            @PathVariable UUID id,
             @RequestBody CreateCategoryRequest request
     ) {
         return categoryService.update(id, request);
@@ -38,7 +39,7 @@ public class CategoryController {
 
     @DeleteMapping("/{id}")
     public DeleteResponse delete(
-            @PathVariable Long id
+            @PathVariable UUID id
     ) {
         return categoryService.delete(id);
     }

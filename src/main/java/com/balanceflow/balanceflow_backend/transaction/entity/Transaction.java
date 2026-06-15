@@ -5,6 +5,8 @@ import com.balanceflow.balanceflow_backend.user.entity.User;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.UUID;
+
 import java.time.LocalDate;
 
 @Entity
@@ -17,8 +19,8 @@ import java.time.LocalDate;
 public class Transaction {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID id;
 
     private Double amount;
 

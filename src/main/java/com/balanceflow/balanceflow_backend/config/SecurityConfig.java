@@ -27,7 +27,7 @@ public class SecurityConfig {
                 )
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/auth/**", "/test-token" ,  "/redis-test" , "/mail-test",    "/api/auth/verify-otp",
-                                "/api/auth/reset-password")
+                                "/api/auth/reset-password", "/error")
                         .permitAll()
                         .anyRequest()
                         .authenticated()

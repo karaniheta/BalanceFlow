@@ -2,6 +2,8 @@ package com.balanceflow.balanceflow_backend.transaction.dto;
 
 import lombok.Data;
 
+import java.util.UUID;
+
 import java.time.LocalDate;
 
 @Data
@@ -13,5 +15,5 @@ public class CreateTransactionRequest {
 
     private LocalDate transactionDate;
 
-    private Long categoryId;
+    private UUID categoryId;
 }

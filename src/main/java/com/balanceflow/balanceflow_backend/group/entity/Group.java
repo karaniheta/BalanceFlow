@@ -4,6 +4,8 @@ import com.balanceflow.balanceflow_backend.user.entity.User;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.UUID;
+
 import java.time.LocalDateTime;
 
 @Entity
@@ -16,8 +18,8 @@ import java.time.LocalDateTime;
 public class Group {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID id;
 
     private String name;
 

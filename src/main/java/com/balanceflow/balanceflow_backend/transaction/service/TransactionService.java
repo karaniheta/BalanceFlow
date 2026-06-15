@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import com.balanceflow.balanceflow_backend.transaction.dto.DeleteResponse;
 import java.util.List;
+import java.util.UUID;
 
 import java.util.List;
 
@@ -76,7 +77,7 @@ public class TransactionService {
     }
 
     public TransactionResponse update(
-            Long transactionId,
+            UUID transactionId,
             CreateTransactionRequest request,
             String email
     ) {
@@ -114,7 +115,7 @@ public class TransactionService {
     }
 
     public DeleteResponse delete(
-            Long transactionId,
+            UUID transactionId,
             String email
     ) {
 
@@ -137,7 +138,7 @@ public class TransactionService {
     }
     public List<TransactionResponse> getByCategory(
             String email,
-            Long categoryId
+            UUID categoryId
     ) {
 
         User user = userRepository.findByEmail(email)
