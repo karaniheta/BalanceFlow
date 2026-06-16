@@ -70,7 +70,7 @@ public class GroupController {
     }
 
     @GetMapping("/{groupId}")
-    public GroupResponse getGroup(
+    public GroupDetailsResponse getGroup(
             @PathVariable UUID groupId
     ) {
 
@@ -88,16 +88,21 @@ public class GroupController {
     @DeleteMapping("/{groupId}/members/{userId}")
     public String removeMember(
             @PathVariable UUID groupId,
-            @PathVariable UUID userId
+            @PathVariable UUID userId,
+            @RequestHeader("Authorization") String authHeader
     ) {
+
+        String token = authHeader.replace("Bearer ", "");
+        String email = jwtService.extractEmail(token);
 
         return groupService.removeMember(
                 groupId,
-                userId
+                userId,
+                email
         );
     }
 
-    @DeleteMapping("/{groupId}/leave")
+    @PostMapping("/{groupId}/leave")
     public String leaveGroup(
             @PathVariable UUID groupId,
             @RequestHeader("Authorization")
@@ -118,9 +123,11 @@ public class GroupController {
 
     @DeleteMapping("/{groupId}")
     public String deleteGroup(
-            @PathVariable UUID groupId
+            @PathVariable UUID groupId,
+            @RequestHeader("Authorization") String authHeader
     ) {
-
-        return groupService.deleteGroup(groupId);
+        String token = authHeader.replace("Bearer ", "");
+        String email = jwtService.extractEmail(token);
+        return groupService.deleteGroup(groupId, email);
     }
 }

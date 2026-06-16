@@ -20,4 +20,5 @@ public interface GroupMemberRepository
             User user
     );
     List<GroupMember> findByGroup(Group group);
+    void deleteByGroup(Group group);
 }
