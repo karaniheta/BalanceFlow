@@ -24,6 +24,7 @@ public class BalanceService {
     private final GroupMemberRepository groupMemberRepository;
     private final ExpenseRepository expenseRepository;
     private final ExpenseParticipantRepository participantRepository;
+    private final com.balanceflow.balanceflow_backend.settlement.repository.SettlementRepository settlementRepository;
 
     public Map<String, UserBalanceDto> getGroupBalances(UUID groupId) {
         Group group = groupRepository.findById(groupId)
@@ -51,6 +52,20 @@ public class BalanceService {
                 participantBalance.setOwes(participantBalance.getOwes() + participant.getShareAmount());
                 balances.put(participantName, participantBalance);
             }
+        }
+
+        List<com.balanceflow.balanceflow_backend.settlement.entity.Settlement> settlements = settlementRepository.findByGroup(group);
+        for (com.balanceflow.balanceflow_backend.settlement.entity.Settlement settlement : settlements) {
+            String payerName = settlement.getPayer().getFullName();
+            String receiverName = settlement.getReceiver().getFullName();
+
+            UserBalanceDto payerBalance = balances.getOrDefault(payerName, UserBalanceDto.builder().paid(0).owes(0).net(0).build());
+            payerBalance.setPaid(payerBalance.getPaid() + settlement.getAmount());
+            balances.put(payerName, payerBalance);
+
+            UserBalanceDto receiverBalance = balances.getOrDefault(receiverName, UserBalanceDto.builder().paid(0).owes(0).net(0).build());
+            receiverBalance.setOwes(receiverBalance.getOwes() + settlement.getAmount());
+            balances.put(receiverName, receiverBalance);
         }
 
         for (UserBalanceDto balance : balances.values()) {

@@ -5,8 +5,7 @@ WORKDIR /app
 
 COPY pom.xml .
 COPY src ./src
-
-RUN mvn clean package -DskipTests
+RUN mvn clean package -DskipTests -Dhttps.protocols=TLSv1.2
 
 # Stage 2 - Runtime
 FROM eclipse-temurin:17-jdk
